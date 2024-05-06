@@ -1,2 +1,3 @@
-# argocd-self
+abc-represents company domain.
+xyz represents sister company.
 
