@@ -1,0 +1,30 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: &ns argocd
+
+helmCharts:
+  - name: pq-argocd # https://gitlab.abc.io/sre/devops/kubernetes/helm-charts/pq-argocd
+    repo: https://artifactory.abc.io/artifactory/helm
+    version: 1.2.0
+    releaseName: argocd
+    namespace: *ns
+    valuesInline:
+      argo-cd:
+        configs:
+          cm:
+            url: https://argocd.abc-acc.xyz.io
+            ui.bannercontent: ArgoCD for k8s-abc-acc
+            accounts.diff-bot: apiKey,login
+          secret:
+            extra:
+              accounts.diff-bot.password: "***********" # see Lastpass
+              accounts.diff-bot.passwordMtime: "2022-12-07T11:00:00Z"
+              accounts.diff-bot.tokens: "null"
+
+resources:
+  - certificate.yaml
+  - emissary-host-and-mapping.yaml
+  - clusterrolebinding.yaml
+  - application-app-of-apps.yaml

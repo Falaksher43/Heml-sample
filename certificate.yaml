@@ -1,0 +1,16 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+    name: argocd-abc-acc-xyz-io
+    namespace: argocd
+    labels:
+        issuer: route53
+        zone: xyz.io
+spec:
+    secretName: argocd-abc-acc-xyz-io-cert
+    issuerRef:
+        name: letsencrypt-prod
+        kind: ClusterIssuer
+    dnsNames:
+        - argocd.abc-acc.xyz.io

@@ -1,0 +1,25 @@
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Host # https://www.getambassador.io/docs/emissary/latest/topics/running/host-crd/
+metadata:
+  name: argocd.abc-acc.xyz.io
+  annotations:
+    external-dns.ambassador-service: emissary-internal-tools.emissary-internal-tools
+spec:
+  ambassador_id:
+    - emissary-internal-tools
+  hostname: argocd.abc-acc.xyz.io
+  tlsSecret:
+    name: argocd-abc-acc-xyz-io-cert
+
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping # https://www.getambassador.io/docs/emissary/latest/topics/using/intro-mappings/
+metadata:
+  name: argocd-server
+spec:
+  ambassador_id:
+    - emissary-internal-tools
+  hostname: argocd.abc-acc.xyz.io
+  prefix: /
+  service: http://argocd-server.argocd

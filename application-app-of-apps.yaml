@@ -1,0 +1,18 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-of-apps
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: .
+    repoURL: https://gitlab.abc.io/sre/devops/kubernetes/argocd/instances/xyz-acc/app-of-apps.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated: {}
