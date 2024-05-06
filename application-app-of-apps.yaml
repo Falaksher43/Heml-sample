@@ -12,7 +12,7 @@ spec:
   project: default
   source:
     path: .
-    repoURL: https://gitlab.abc.io/sre/devops/kubernetes/argocd/instances/xyz-acc/app-of-apps.git
+    repoURL: https://gitlab.abc.io/sre/devops/kubernetes/argocd/instances/abc-acc/app-of-apps.git
     targetRevision: HEAD
   syncPolicy:
     automated: {}
